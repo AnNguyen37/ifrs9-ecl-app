@@ -123,7 +123,7 @@ with col_right:
             return 'background-color: #f8d7da'
         return ''
     
-    styled = iv_decision_table.style.applymap(color_decision, subset=['Decision'])
+    styled = iv_decision_table.style.map(color_decision, subset=['Decision'])
     st.dataframe(styled, hide_index=True, use_container_width=True)
 
     st.markdown("---")
@@ -190,7 +190,7 @@ def style_decision(val):
     return colors.get(val, '')
 
 styled = (filtered_df.style
-          .applymap(style_decision, subset=['decision'])
+          .map(style_decision, subset=['decision'])
           .format({'iv_original': '{:.4f}', 'iv_rebinned': '{:.4f}'}))
 
 st.dataframe(styled, use_container_width=True, hide_index=True, height=500)

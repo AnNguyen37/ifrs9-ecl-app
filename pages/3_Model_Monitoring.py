@@ -154,7 +154,7 @@ with col_thresholds:
         }
         return colors.get(val, '')
     
-    styled = thresholds_df.style.applymap(color_stability, subset=['Stability'])
+    styled = thresholds_df.style.map(color_stability, subset=['Stability'])
     st.dataframe(styled, hide_index=True, use_container_width=True)
 
 # ============================================================
@@ -284,7 +284,7 @@ def style_stability(val):
     return ''
 
 styled_table = (psi_summary.style
-                .applymap(style_stability, subset=['Stability'])
+                .map(style_stability, subset=['Stability'])
                 .format({'PSI': '{:.4f}'}))
 
 st.dataframe(styled_table, use_container_width=True, hide_index=True)
@@ -380,7 +380,7 @@ def highlight_contribution(val):
     return ''
 
 styled_drill = (var_display.style
-                .applymap(highlight_contribution, subset=['PSI Contribution'])
+                .map(highlight_contribution, subset=['PSI Contribution'])
                 .format({
                     'Training %': '{:.4f}',
                     'Monitoring %': '{:.4f}',

@@ -451,7 +451,7 @@ with st.expander("📘 For technical readers: OLS coefficient table and diagnost
     coef_display = coefficients.copy()
     
     styled_coef = (coef_display.style
-                   .applymap(style_significance, subset=['significant'])
+                   .map(style_significance, subset=['significant'])
                    .format({
                        'coefficient': '{:.6f}',
                        'p_value': '{:.4f}'

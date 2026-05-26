@@ -129,7 +129,7 @@ def style_significance(val):
 
 styled_coef = (display_df[['feature_name', 'variable', 'bin', 'coefficient', 'p_value', 'significant']]
                .style
-               .applymap(style_significance, subset=['significant'])
+               .map(style_significance, subset=['significant'])
                .format({
                    'coefficient': '{:.4f}',
                    'p_value': '{:.4f}'
