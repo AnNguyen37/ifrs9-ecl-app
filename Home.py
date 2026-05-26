@@ -287,7 +287,7 @@ with st.expander("👤 About this project"):
     - A substitute for full IRB or IFRS 9 validation
     - Production data — Lending Club is public retail data, not a real bank portfolio
     
-    **Code and documentation:** [GitHub repository link]
+    **Code and documentation:** https://ifrs9-ecl-app-zxjnxemkyxcm7magyrhyvs.streamlit.app/
     
-    **Contact:** [Your contact information]
+    **Contact:** An Nguyen (ngth.hoai.an@gmail.com)
     """)
