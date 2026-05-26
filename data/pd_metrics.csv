@@ -1,0 +1,2 @@
+AUROC_train,AUROC_test,Gini_train,Gini_test,KS_test,accuracy_test,threshold,gini_gap,n_train,n_test,bad_rate_train,bad_rate_test
+0.7109,0.6983,0.4217,0.3965,0.2876,0.6482,0.8,0.0252,1084079,263980,0.1954,0.2176

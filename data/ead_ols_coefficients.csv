@@ -1,0 +1,35 @@
+feature,coefficient,p_value,significant
+const,0.35530483685744413,0.0,True
+grade:A,-0.031921267901634395,0.0,True
+grade:B,-0.023120403327621643,0.0002,True
+grade:C,-0.011408385690008417,0.0336,True
+grade:D,-0.005818294679924548,0.2104,False
+grade:E,-0.0018669449900668195,0.6554,False
+grade:F,-0.0018187860315277268,0.653,False
+home_ownership:OWN,0.004322446972822569,0.0046,True
+home_ownership:MORTGAGE,-0.0021298336180960733,0.0348,True
+verification_status:Not Verified,0.002649557144516424,0.0341,True
+verification_status:Source Verified,0.0027444494986438896,0.0071,True
+purpose:debt_consolidation,-0.02492541176597149,0.0,True
+purpose:educational_other,-0.013701674536010337,0.0,True
+purpose:vacation_major_purchase_home_improvement,-0.009803727519518824,0.0003,True
+purpose:credit_card_car_wedding,-0.035334796978956966,0.0,True
+term_int,0.005179095522695847,0.0,True
+mths_since_earliest_cr_line,-0.00011279383440891192,0.0,True
+funded_amnt,-1.7238744136965304e-06,0.0,True
+int_rate,0.007545137048927795,0.0,True
+installment,7.075671508363092e-05,0.0,True
+annual_inc,2.6746535561583508e-08,0.0001,True
+dti,0.0005649983828233407,0.0,True
+total_rev_hi_lim,2.5852135978025554e-07,0.0,True
+addr_state:LA_NV_TN_SD,0.004800096663520138,0.1003,False
+addr_state:NY,-0.0056591078513660055,0.03,True
+addr_state:IN_NM_MO,-0.001648536200726517,0.5895,False
+addr_state:FL,0.004855421310281601,0.0688,False
+addr_state:KY_MD_ND_IA_NJ_OH_PA_NC_ID,-0.0018088967393928854,0.4451,False
+addr_state:HI_MI_VA_DE_MN_AZ,0.003519003032158773,0.1631,False
+addr_state:TX_AK,-0.0021388394990596044,0.414,False
+addr_state:CA,0.007095049108513699,0.0038,True
+addr_state:MA_GA_RI_IL_UT,-0.0028387937857042257,0.2657,False
+addr_state:WI_CT_MT_WY_SC_KS,-0.01182542976924975,0.0001,True
+addr_state:WV_WA_CO_ME_OR_NH_VT_DC,0.0023506536281066226,0.4099,False

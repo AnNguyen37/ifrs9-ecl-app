@@ -1,0 +1,5 @@
+model,split,intercept,mae,bias,correlation,rmse,r2,mean_pred,mean_actual
+Original,train,0.355305,0.1653,-0.0,0.3957,0.2053,0.1566,0.6649,0.6649
+Original,test,0.355305,0.173,-0.157,0.4216,0.2012,-1.3048,0.6725,0.8296
+Recalibrated,train,0.386086,0.1633,0.0308,0.3958,0.2075,0.1377,0.6957,0.6649
+Recalibrated,test,0.386086,0.149,-0.1263,0.4217,0.1782,-0.8083,0.7033,0.8296

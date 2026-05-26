@@ -1,0 +1,38 @@
+# ── Python ────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+
+# ── Virtual environment ───────────────────────────────────────
+.venv/
+venv/
+env/
+
+# ── Large raw data files not used by the app ─────────────────
+# (App uses the smaller pre-processed files only)
+data/pd_predictions.csv
+data/pd_roc_curve.csv
+data/pd_score_distribution.csv
+data/score_dist_train.csv
+data/ead_portfolio.csv
+
+# ── macOS ─────────────────────────────────────────────────────
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# ── Streamlit ─────────────────────────────────────────────────
+.streamlit/secrets.toml
+
+# ── Jupyter ───────────────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb
+
+# ── IDE ───────────────────────────────────────────────────────
+.vscode/
+.idea/
