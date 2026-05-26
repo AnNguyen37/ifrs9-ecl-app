@@ -15,7 +15,7 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("💰 LGD Estimation")
+st.title("LGD Estimation")
 st.markdown("**Loss Given Default for the IFRS 9 ECL calculation**")
 
 # ============================================================

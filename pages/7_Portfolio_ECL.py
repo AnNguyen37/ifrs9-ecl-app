@@ -16,7 +16,7 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("💼 Portfolio ECL Analysis")
+st.title("Portfolio ECL Analysis")
 st.markdown("**The CFO view — IFRS 9 provisions across the entire portfolio**")
 
 # ============================================================
