@@ -34,7 +34,7 @@ This app walks through every layer of the IFRS 9 ECL calculation — from raw va
 
 ```bash
 # Clone
-git clone https://github.com/<your-username>/ifrs9-ecl-app.git
+git clone https://github.com/AnNguyen37/ifrs9-ecl-app.git
 cd ifrs9-ecl-app
 
 # Install dependencies
