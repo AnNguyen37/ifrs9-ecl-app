@@ -142,10 +142,10 @@ Three pragmatic decisions distinguish this project from textbook implementations
 
 decisions_df = pd.DataFrame({
     'Component': [
-        '**PD**',
-        '**LGD**',
-        '**EAD**',
-        '**Timing**'
+        'PD',
+        'LGD',
+        'EAD',
+        'Timing'
     ],
     'Approach': [
         'Logistic regression with WoE',
@@ -212,8 +212,8 @@ pages_df = pd.DataFrame({
         'Validation teams',
         'Senior credit managers',
         'Regulatory contacts',
-        '**Everyone — the integration showcase**',
-        '**CFOs and risk committees**'
+        'Everyone — the integration showcase',
+        'CFOs and risk committees'
     ]
 })
 
