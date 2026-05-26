@@ -1,70 +1,51 @@
 # IFRS 9 Lifetime ECL Engine
 
-An end-to-end credit risk modelling app built with Streamlit, demonstrating a full IFRS 9 Expected Credit Loss (ECL) framework on LendingClub data.
+**A full credit risk model built on 2.2 million LendingClub loans — PD scorecard, LGD, EAD, and IFRS 9 provisions in one interactive app.** Every modelling decision is justified with data, benchmarked against alternatives, and documented following industry practice (GARP, CRR3, IFRS 9).
 
-## Live App
+[![Live App](https://img.shields.io/badge/Streamlit-Live%20Demo-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://ifrs9-ecl-app-zxjnxemkyxcm7magyrhyvs.streamlit.app/)
 
-[![Streamlit App](https://img.shields.io/badge/Streamlit-Live%20App-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://ifrs9-ecl-app-zxjnxemkyxcm7magyrhyvs.streamlit.app/)
+![App screenshot](assets/screenshot.png)
 
-## Overview
+---
 
-This app walks through every layer of the IFRS 9 ECL calculation — from raw variable selection through to portfolio-level provisions — using a publicly available LendingClub dataset (~2.2M loans, 2007–2018).
+## Results at a glance
 
-| Component | Method | Key metric |
+| Component | Method | Outcome |
 |---|---|---|
-| PD | Logistic regression + WoE scorecard | Gini 0.40 (OOT) |
-| LGD | Portfolio constant (beats Beta regression) | MAE 0.036 |
-| EAD | Amortisation schedule (outperforms OLS) | R² –0.02 (OLS fails) |
-| ECL | Σ PD_t × LGD × EAD_t | Stage 1 / Stage 2 split |
+| **PD** | Logistic regression + WoE scorecard | Gini **0.40** out-of-time, PSI 0.046 (stable) |
+| **LGD** | Portfolio constant vs Beta regression | Constant **beats** 2-stage model (MAE 0.036) |
+| **EAD** | Amortisation schedule vs OLS | OLS fails out-of-time (R² < 0); amortisation is exact |
+| **ECL** | Σ PD_t × LGD × EAD_t | Stage 1: **$1.28B** · Stage 2: **$2.50B** |
 
-## Pages
+---
 
-| # | Page | Description |
-|---|---|---|
-| 🏠 | Home | Portfolio ECL dashboard — Stage 1 vs Stage 2 headline numbers |
-| 1 | Theoretical Framework & Variable Selection | 5C framework, WoE binning, IV screening |
-| 2 | PD Model & Scorecard | Logistic regression, ROC, score distribution, PD simulator |
-| 3 | Model Monitoring | PSI, score stability, out-of-time validation |
-| 4 | EAD Approach | Amortisation-based EAD vs OLS benchmark |
-| 5 | Default Timing & ECL Simulator | Timing curves, individual loan ECL calculator |
-| 6 | LGD Estimation | Beta regression vs portfolio constant head-to-head |
-| 7 | Portfolio ECL | Timeline, ECL by grade and term, stress testing |
+## Seven pages, one story
 
-## Quick Start
+| Page | What you'll see |
+|---|---|
+| **1 · Variable Selection** | 5C framework, WoE binning, IV screening across 19 candidates |
+| **2 · PD Model** | Scorecard estimation, ROC curves, live PD simulator |
+| **3 · Model Monitoring** | PSI on 2019 Q1 data, score stability, out-of-time validation |
+| **4 · EAD** | Why amortisation beats OLS — benchmarked and explained |
+| **5 · Default Timing** | Kaplan-Meier timing curves + individual loan ECL calculator |
+| **6 · LGD** | Beta regression vs portfolio constant — head-to-head with data |
+| **7 · Portfolio ECL** | Stage 1/2 provisions by grade and term, stress scenario simulator |
+
+---
+
+## Run locally
 
 ```bash
-# Clone
 git clone https://github.com/AnNguyen37/ifrs9-ecl-app.git
 cd ifrs9-ecl-app
-
-# Install dependencies
 pip install -r requirements.txt
-
-# Run
 streamlit run Home.py
 ```
 
-## Key Technical Decisions
+Data source: [LendingClub 2007–2018 Q4](https://www.kaggle.com/datasets/wordsforthewise/lending-club) (public, not included). Pre-processed model artefacts are in `data/`.
 
-- **PD model target**: `good_bad = 1` (good) / `0` (bad). `result.predict()` returns P(good), so `PD_default = 1 − P(good)` throughout.
-- **Stage 1 ECL**: sum of monthly ECL for months 1–12
-- **Stage 2 ECL**: sum of monthly ECL for all months (lifetime)
-- **Timing weights**: `w_t = defaults_in_month_t / total_defaults_in_segment` — no lifelines dependency
-- **EAD**: beginning-of-period outstanding balance using `EAD_t = P × [(1+r)^n − (1+r)^(t−1)] / [(1+r)^n − 1]`
+---
 
-## Data
+## Contact
 
-Source: [LendingClub Loan Data 2007–2018 Q4](https://www.kaggle.com/datasets/wordsforthewise/lending-club) (public dataset, not included in this repo).
-
-Pre-processed model artefacts are included in `data/`.
-
-## Requirements
-
-```
-streamlit==1.37.0
-pandas==2.2.2
-numpy==1.26.4
-plotly==5.22.0
-scikit-learn==1.5.1
-statsmodels==0.14.2
-```
+**An Nguyen** · ngth.hoai.an@gmail.com
