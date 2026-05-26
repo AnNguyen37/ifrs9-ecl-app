@@ -228,11 +228,11 @@ with st.expander("📘 Technical summary"):
     st.markdown("""
     ### Dataset
     
-    - **Source:** Lending Club public loan data (2007–2019)
-    - **Scope:** Unsecured personal loans, 36-month and 60-month terms
-    - **Training sample:** 1.08 million completed loans (Jan 2014 – Dec 2017)
-    - **Test sample:** 264,000 loans (Jan 2018 – Dec 2018, temporal out-of-time)
-    - **Monitoring sample:** 14,000 loans (2019 Q1, vintage-fresh)
+    - Source: Lending Club public loan data (2007–2019)
+    - Scope: Unsecured personal loans, 36-month and 60-month terms
+    - Training sample: 1.08 million completed loans (Jan 2014 – Dec 2017)
+    - Test sample: 264,000 loans (Jan 2018 – Dec 2018, temporal out-of-time)
+    - Monitoring sample: 14,000 loans (2019 Q1, vintage-fresh)
     
     ### Modelling pipeline
     

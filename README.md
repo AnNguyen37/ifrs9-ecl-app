@@ -4,7 +4,7 @@ An end-to-end credit risk modelling app built with Streamlit, demonstrating a fu
 
 ## Live App
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ifrs9-ecl-app-zxjnxemkyxcm7magyrhyvs.streamlit.app/)
+[![Streamlit App]](https://ifrs9-ecl-app-zxjnxemkyxcm7magyrhyvs.streamlit.app/)
 
 ## Overview
 
