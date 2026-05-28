@@ -27,8 +27,8 @@
 | **2 · PD Model** | Scorecard estimation, ROC curves, live PD simulator |
 | **3 · Model Monitoring** | PSI on 2019 Q1 data, score stability, out-of-time validation |
 | **4 · EAD** | Why amortisation beats OLS — benchmarked and explained |
-| **5 · Default Timing** | Kaplan-Meier timing curves + individual loan ECL calculator |
-| **6 · LGD** | Beta regression vs portfolio constant — head-to-head with data |
+| **5 · LGD** | Beta regression vs portfolio constant — head-to-head with data |
+| **6 · Default Timing** | Kaplan-Meier timing curves + individual loan ECL calculator |
 | **7 · Portfolio ECL** | Stage 1/2 provisions by grade and term, stress scenario simulator |
 
 ---

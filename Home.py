@@ -193,8 +193,8 @@ pages_df = pd.DataFrame({
         '2. PD Model',
         '3. Model Monitoring',
         '4. EAD Approach',
-        '5. Default Timing & ECL Simulator',
-        '6. LGD Estimation',
+        '5. LGD Estimation',
+        '6. Default Timing & ECL Simulator',
         '7. Portfolio ECL'
     ],
     'What You\'ll See': [
@@ -202,8 +202,8 @@ pages_df = pd.DataFrame({
         'Scorecard estimation, performance, and PD simulator',
         'PSI analysis on 2019 Q1 monitoring data',
         'Why amortisation beats OLS for term loans',
-        'Loan-level ECL simulator combining all components',
         'Why a portfolio constant beats individual-level models',
+        'Loan-level ECL simulator combining all components',
         'Aggregated portfolio provisions and stress scenarios'
     ],
     'Best For': [
@@ -211,8 +211,8 @@ pages_df = pd.DataFrame({
         'Quantitative modellers',
         'Validation teams',
         'Regulatory contacts',
-        'Everyone — the integration showcase',
         'Senior credit managers',
+        'Everyone — the integration showcase',
         'CFOs and risk committees'
     ]
 })
