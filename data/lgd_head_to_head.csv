@@ -1,0 +1,4 @@
+model,mae,bias,correlation,rmse,r2,mean_predicted,mean_actual
+Model 1 — 2-Stage,0.0442,-0.0045,-0.0112,0.0901,-0.0445,0.851,0.8555
+Model 2 — Direct Beta,0.1347,0.1342,-0.0156,0.1608,-2.3228,0.9897,0.8555
+Benchmark — Constant LGD,0.036,0.0,0.0,0.0882,0.0,0.8555,0.8555

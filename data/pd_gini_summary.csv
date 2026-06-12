@@ -1,0 +1,2 @@
+Gini_train,Gini_test,AUROC_train,AUROC_test,difference
+0.4217,0.3965,0.7109,0.6983,0.0252

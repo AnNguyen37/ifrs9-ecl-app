@@ -1,0 +1,19 @@
+variable,category,iv_original,iv_rebinned,n_bins,decision,rationale
+open_acc,CAPITAL,0.0083,0.0072,5,DROP,IV below threshold after binning. Weak predictive power.
+emp_length_int,CAPACITY,0.005,0.0048,4,DROP,Employment stability. Longer tenure correlates with lower risk.
+delinq_2yrs,CHARACTER,0.0021,0.002,3,DROP,"Recent delinquency history. 3 bins: 0, 1, >1."
+initial_list_status,CONDITIONS,0.0006,0.0006,2,DROP,Platform listing type. Low IV — insufficient predictive power.
+total_acc,CAPITAL,0.0014,0.0005,4,DROP,IV = 0.0014 — below 0.02 threshold. Insufficient predictive power.
+grade,CHARACTER,0.4706,0.4706,7,KEEP,Strong monotonic WoE. LC risk grade captures FICO + DTI. No grouping needed.
+int_rate,CONDITIONS,0.4753,0.4314,7,KEEP,Risk-based pricing. Strongest predictor — strong monotonic WoE.
+term,CONDITIONS,0.2035,0.2035,2,KEEP,36 vs 60 months. Longer term correlates with higher risk.
+dti,CAPACITY,0.0757,0.0768,9,KEEP,Debt burden relative to income. Monotonically decreasing WoE.
+verification_status,CHARACTER,0.0522,0.0522,3,KEEP,Income credibility signal. 3 categories with clear WoE separation.
+annual_inc,CAPACITY,0.0262,0.031,11,KEEP,Income level. Monotonically increasing WoE. 11 bins up to >150K.
+inq_last_6mths,CHARACTER,0.0277,0.0276,4,KEEP,Recent credit-seeking behaviour. Monotonically decreasing WoE.
+home_ownership,CAPITAL,0.0256,0.0256,3,KEEP,Property as financial asset. RENT/OTHER/NONE/ANY merged (similar WoE).
+installment,CAPACITY,0.0363,0.023,6,KEEP,Monthly payment obligation. Lower installment → better credit quality.
+total_rev_hi_lim,CAPITAL,0.0238,0.0229,6,KEEP,Total revolving credit access. Higher limit → lower risk.
+purpose,CONDITIONS,0.0201,0.0185,5,KEEP,Use of funds. Small business / medical highest risk; credit card lowest.
+mths_since_earliest_cr_line,CHARACTER,0.0186,0.0144,3,KEEP,Length of credit history. Longer history → lower risk.
+addr_state,CONDITIONS,0.0149,0.0144,12,KEEP,Geographic environment. 50 states grouped into 12 WoE-homogeneous regions.
