@@ -13,7 +13,7 @@
 | Component | Method | Outcome |
 |---|---|---|
 | **PD** | Logistic regression + WoE scorecard | Gini **0.40** out-of-time, PSI 0.046 (stable) |
-| **LGD** | Portfolio constant vs Beta regression | Constant **beats** 2-stage model (MAE 0.036) |
+| **LGD** | Portfolio constant vs Beta regression | Constant MAE **0.036** beats 2-stage model MAE 0.044 |
 | **EAD** | Amortisation schedule vs OLS | OLS fails out-of-time (R² < 0); amortisation is exact |
 | **ECL** | Σ PD_t × LGD × EAD_t | Stage 1: **$1.28B** · Stage 2: **$2.50B** |
 
