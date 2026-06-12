@@ -42,7 +42,7 @@ pip install -r requirements.txt
 streamlit run Home.py
 ```
 
-Data source: [LendingClub 2007–2018 Q4](https://www.kaggle.com/datasets/wordsforthewise/lending-club) (public, not included). Pre-processed model artefacts are in `data/`.
+Data source: [LendingClub 2007–2018 Q4](https://www.kaggle.com/datasets/wordsforthewise/lending-club) (public, not included). Model outputs and pre-computed artefacts (metrics, summaries, scorecard parameters) are in `data/`. Raw loan data is not included.
 
 ---
 
