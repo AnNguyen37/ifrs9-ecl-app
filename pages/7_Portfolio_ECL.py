@@ -633,8 +633,8 @@ with st.expander("📘 ECL Methodology Summary"):
     st.markdown(r"""
     Where:
     - $PD_t$ = monthly default probability (Page 2 scorecard × Page 6 timing curve)
-    - $LGD$ = 0.8555 (Page 4 portfolio constant)
-    - $EAD_t$ = outstanding balance at month $t$ (Page 5 amortisation schedule)
+    - $LGD$ = 0.8555 (Page 5 portfolio constant)
+    - $EAD_t$ = outstanding balance at month $t$ (Page 4 amortisation schedule)
     
     ### Staging logic
 
@@ -659,7 +659,7 @@ with st.expander("📘 ECL Methodology Summary"):
     - **No prepayment**: Loans are assumed to follow scheduled amortisation
     - **No discounting**: ECL is presented in undiscounted form for clarity
     - **Static portfolio**: No new originations or runoff assumed
-    - **Homogeneous LGD**: Single constant across all segments (validated in Page 4)
+    - **Homogeneous LGD**: Single constant across all segments (validated in Page 5)
     
     Production IFRS 9 models would typically add:
     - Discounting at the loan's effective interest rate

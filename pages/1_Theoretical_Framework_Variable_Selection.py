@@ -4,16 +4,6 @@ import pandas as pd
 st.set_page_config(page_title="Theoretical Framework", layout="wide")
 st.title("Theoretical Framework & Variable Selection")
 
-# ─── Load Data ─────────────────────────────────────────────
-@st.cache_data
-def load_data():
-    var_summary = pd.read_csv('data/variable_summary.csv')
-    woe_data = pd.read_csv('data/woe_rebinned.csv')
-    woe_data = pd.read_csv('data/woe_original.csv')
-    return var_summary, woe_data
-
-var_summary, woe_data = load_data()
-
 st.header("1. The 5 Cs of Credit Framework")
 
 st.markdown("""

@@ -1,6 +1,6 @@
 """
-Page 4: LGD Estimation
-File: ifrs9_app/pages/4_LGD_Estimation.py
+Page 5: LGD Estimation
+File: ifrs9_app/pages/5_LGD_Estimation.py
 """
 
 import streamlit as st

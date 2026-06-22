@@ -1,6 +1,6 @@
 """
-Page 5: EAD Approach
-File: ifrs9_app/pages/5_📉_EAD_Approach.py
+Page 4: EAD Approach
+File: ifrs9_app/pages/4_EAD_Approach.py
 """
 
 import streamlit as st
@@ -16,7 +16,7 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("📉 EAD Approach")
+st.title("EAD Approach")
 st.markdown("**Exposure at Default for the IFRS 9 ECL calculation**")
 
 # ============================================================
@@ -417,7 +417,7 @@ st.latex(r"ECL = \sum_{t=1}^{N} PD_t \times LGD \times EAD_t")
 st.markdown("""
 Where:
 - $PD_t$ comes from the PD scorecard × timing curve (Page 2)
-- $LGD$ = 0.8555 (Page 4)
+- $LGD$ = 0.8555 (Page 5)
 - $EAD_t$ comes from the amortisation schedule (this page)
 
 For **Stage 1** (12-month horizon): sum across months 1–12 with EAD decreasing 

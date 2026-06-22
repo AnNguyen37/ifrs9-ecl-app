@@ -1,5 +1,5 @@
 """
-Page 4: Default Timing & Individual ECL Simulator
+Page 6: Default Timing & Individual ECL Simulator
 """
 
 import streamlit as st
@@ -520,7 +520,7 @@ st.markdown(f"""
 For this loan:
 
 - **Lifetime PD** = {pd_lifetime:.4f} (from scorecard)
-- **LGD** = {PORTFOLIO_LGD} (portfolio constant from Page 4)
+- **LGD** = {PORTFOLIO_LGD} (portfolio constant from Page 5)
 - **EAD_t** = amortisation schedule for {term}-month loan at {int_rate}%
 - **w_t** = timing curve for **{segment}** segment
 
@@ -621,24 +621,44 @@ with st.expander("📘 For technical readers: timing curve methodology"):
     st.latex(r"\sum_{t=1}^{T} PD_t = PD_{lifetime} \times \sum_{t=1}^{T} w_t = PD_{lifetime} \times 1.0")
     
     st.markdown("""
-    The monthly probabilities sum exactly to the lifetime PD, preserving the 
+    The monthly probabilities sum exactly to the lifetime PD, preserving the
     scorecard's calibration.
-    
-    ### Why segment by term × grade group?
-    
+
+    ### Why segment by term × grade?
+
     Each segment has a distinct timing pattern:
-    
+
     - **Term matters** because 36-month loans concentrate risk in fewer months
-    - **Grade group matters** because high-risk borrowers default earlier
-    - **6 segments** balance granularity with statistical reliability
-    - Finer segmentation (e.g., by individual grade) would reduce sample sizes 
-      below the n ≥ 1,000 threshold for stable estimates
-    
+    - **Grade matters** because high-risk borrowers default earlier
+    - **10 segments** (term × grade): individual segments A, B, C, D, plus
+      combined E-G for the lowest grades where sample sizes are smaller
+    - The E-G combination ensures n ≥ 45,000 per segment while preserving
+      granularity for the higher-volume grades A through D
+
+    ### Sample sizes per segment
+
+    | Segment | n_loans |
+    |---|---|
+    | 36_A | 228,898 |
+    | 36_B | 345,266 |
+    | 36_C | 276,707 |
+    | 36_D | 126,676 |
+    | 36_E-G | 45,634 |
+    | 60_A | 6,290 |
+    | 60_B | 47,829 |
+    | 60_C | 105,608 |
+    | 60_D | 74,968 |
+    | 60_E-G | 90,183 |
+
+    All segments have sample sizes well above the typical n ≥ 1,000 threshold
+    for stable Kaplan-Meier estimation. The smallest segment (60_A) has 6,290
+    loans — still substantial for empirical hazard estimation.
+
     ### Right-censoring handling
-    
-    Non-defaulted loans contribute information about survival without contributing 
+
+    Non-defaulted loans contribute information about survival without contributing
     to the default count. Kaplan-Meier handles this correctly:
-    
+
     - A loan that runs to maturity without defaulting is censored at the full term
     - A loan still active at the reporting date is censored at the current age
     - Default observations are uncensored (the event was observed)
@@ -685,53 +705,9 @@ with st.expander("🔍 Industry comparison — three IFRS 9 PD term-structure ap
     The Lending Club portfolio specifically fits this approach because:
     
     - PD scorecard already exists (Page 2)
-    - LGD is a portfolio constant (Page 4) — no behavioural model
-    - EAD is deterministic via amortisation (Page 5)
+    - EAD is deterministic via amortisation (Page 4)
+    - LGD is a portfolio constant (Page 5) — no behavioural model
     - All four components are additive and explainable
     
     A more complex approach would obscure rather than improve the model.
-    """)
-
-    st.markdown("""
-    The monthly probabilities sum exactly to the lifetime PD, preserving the 
-    scorecard's calibration.
-    
-    ### Why segment by term × grade?
-    
-    Each segment has a distinct timing pattern:
-    
-    - **Term matters** because 36-month loans concentrate risk in fewer months
-    - **Grade matters** because high-risk borrowers default earlier
-    - **10 segments** (term × grade): individual segments A, B, C, D, plus 
-      combined E-G for the lowest grades where sample sizes are smaller
-    - The E-G combination ensures n ≥ 45,000 per segment while preserving 
-      granularity for the higher-volume grades A through D
-    
-    ### Sample sizes per segment
-    
-    | Segment | n_loans |
-    |---|---|
-    | 36_A | 228,898 |
-    | 36_B | 345,266 |
-    | 36_C | 276,707 |
-    | 36_D | 126,676 |
-    | 36_E-G | 45,634 |
-    | 60_A | 6,290 |
-    | 60_B | 47,829 |
-    | 60_C | 105,608 |
-    | 60_D | 74,968 |
-    | 60_E-G | 90,183 |
-    
-    All segments have sample sizes well above the typical n ≥ 1,000 threshold 
-    for stable Kaplan-Meier estimation. The smallest segment (60_A) has 6,290 
-    loans — still substantial for empirical hazard estimation.
-    
-    ### Right-censoring handling
-    
-    Non-defaulted loans contribute information about survival without contributing 
-    to the default count. Kaplan-Meier handles this correctly:
-    
-    - A loan that runs to maturity without defaulting is censored at the full term
-    - A loan still active at the reporting date is censored at the current age
-    - Default observations are uncensored (the event was observed)
     """)
