@@ -101,7 +101,7 @@ cols_needed = [
 ]
 
 loan_data = pd.read_csv(
-    'ifrs9_app/data/accepted_2007_to_2018q4.csv/accepted_2007_to_2018q4.csv',
+    'ifrs9_app/data/accepted_2007_to_2018q4.csv',
     usecols=cols_needed
 )
 print(f"Raw dataset shape: {loan_data.shape}")
@@ -331,7 +331,9 @@ def collect_summary(variable, category, iv_original, iv_rebinned,
 # 8. SELECT DATASET FOR PREPROCESSING
 # =============================================================================
 #####
-df_inputs_prepr  = loan_data_test
+# Variable/IV selection is a training-time decision — compute WoE & IV on the
+# training split only, never the out-of-time test set (avoids look-ahead bias).
+df_inputs_prepr  = loan_data_train
 #####
 # df_inputs_prepr  = loan_data_inputs_test
 # df_targets_prepr = loan_data_targets_test
@@ -468,12 +470,17 @@ df_inputs_prepr['mths_since_earliest_cr_line:>350']   = np.where( df_inputs_prep
 # -----------------------------------------------------------------------------
 print(f"95th percentile annual_inc: {df_inputs_prepr['annual_inc'].quantile(0.95):,.0f}")
 
-df_inputs_prepr_temp = df_inputs_prepr.loc[df_inputs_prepr['annual_inc'] <= 160000].copy()
-df_inputs_prepr_temp['annual_inc_factor'] = pd.cut(df_inputs_prepr_temp['annual_inc'], 50)
-df_temp_fine = woe_continuous(df_inputs_prepr_temp, 'annual_inc_factor')
+# 50 equal-width fine bins up to 160K (keeps the fine WoE readable against income
+# outliers), plus one extra bin for the >160K tail so the fine IV still covers the
+# full population — same rows as the coarse binning below.
+fine_edges = np.linspace(df_inputs_prepr['annual_inc'].min(), 160000, 51)
+fine_edges = np.append(fine_edges, df_inputs_prepr['annual_inc'].max())
+df_inputs_prepr['annual_inc_factor'] = pd.cut(
+    df_inputs_prepr['annual_inc'], bins=fine_edges, include_lowest=True)
+df_temp_fine = woe_continuous(df_inputs_prepr, 'annual_inc_factor')
 plot_by_woe(df_temp_fine, 90)
 iv_fine = df_temp_fine['IV'].values[0]
-del df_inputs_prepr_temp
+df_inputs_prepr.drop(columns=['annual_inc_factor'], inplace=True)
 
 df_inputs_prepr['annual_inc_binned'] = pd.cut(
     df_inputs_prepr['annual_inc'],
@@ -513,12 +520,17 @@ df_inputs_prepr = pd.concat(
 # -----------------------------------------------------------------------------
 # dti                      [CAPACITY — Debt burden relative to income]
 # -----------------------------------------------------------------------------
-df_inputs_prepr_temp = df_inputs_prepr.loc[df_inputs_prepr['dti'] <= 39].copy()
-df_inputs_prepr_temp['dti_factor'] = pd.cut(df_inputs_prepr_temp['dti'], 50)
-df_temp_fine = woe_continuous(df_inputs_prepr_temp, 'dti_factor')
+# 50 equal-width fine bins up to 39 (keeps the fine WoE readable against DTI
+# outliers, which reach 999), plus one extra bin for the >39 tail so the fine IV
+# still covers the full population — same rows as the coarse binning below.
+fine_edges = np.linspace(df_inputs_prepr['dti'].min(), 39, 51)
+fine_edges = np.append(fine_edges, df_inputs_prepr['dti'].max())
+df_inputs_prepr['dti_factor'] = pd.cut(
+    df_inputs_prepr['dti'], bins=fine_edges, include_lowest=True)
+df_temp_fine = woe_continuous(df_inputs_prepr, 'dti_factor')
 plot_by_woe(df_temp_fine, 90)
 iv_fine = df_temp_fine['IV'].values[0]
-del df_inputs_prepr_temp
+df_inputs_prepr.drop(columns=['dti_factor'], inplace=True)
 
 df_inputs_prepr['dti_binned'] = pd.cut(
     df_inputs_prepr['dti'],
@@ -1013,30 +1025,14 @@ print(f"Variables selected: {len(cols_to_keep) - 1} dummies + 1 ID")
 # =============================================================================
 # 12. SAVE PREPROCESSED DATA
 # =============================================================================
-loan_data_test  = df_inputs_prepr
+loan_data_train = df_inputs_prepr
 # %%
-# ── Save WoE Summary for Streamlit ───────────────────────────────────────────
-# ── Save Three CSVs for Streamlit WoE Explorer ───────────────────────────────
+# ── Save variable summary for Streamlit (Page 1) ─────────────────────────────
+# Page 1 consumes only variable_summary.csv. The granular woe_original / woe_rebinned
+# tables are diagnostics used during binning and are not read by the app, so they
+# are not written to disk.
 
-# 1. Granular WoE before binning
-df_woe_original = pd.concat(original_results, ignore_index=True)
-df_woe_original['WoE']            = df_woe_original['WoE'].round(4)
-df_woe_original['proportion']     = df_woe_original['proportion'].round(4)
-df_woe_original['iv_contribution'] = df_woe_original['iv_contribution'].round(6)
-df_woe_original['IV']             = df_woe_original['IV'].round(4)
-df_woe_original.to_csv('ifrs9_app/data/woe_original.csv', index=False)
-print(f"woe_original.csv  — {len(df_woe_original)} rows, {df_woe_original['variable'].nunique()} variables")
-
-# 2. Final WoE after binning
-df_woe_rebinned = pd.concat(rebinned_results, ignore_index=True)
-df_woe_rebinned['WoE']            = df_woe_rebinned['WoE'].round(4)
-df_woe_rebinned['proportion']     = df_woe_rebinned['proportion'].round(4)
-df_woe_rebinned['iv_contribution'] = df_woe_rebinned['iv_contribution'].round(6)
-df_woe_rebinned['IV']             = df_woe_rebinned['IV'].round(4)
-df_woe_rebinned.to_csv('ifrs9_app/data/woe_rebinned.csv', index=False)
-print(f"woe_rebinned.csv  — {len(df_woe_rebinned)} rows, {df_woe_rebinned['variable'].nunique()} variables")
-
-# 3. Variable summary — one row per variable
+# Variable summary — one row per variable
 df_variable_summary = pd.DataFrame(summary_results)
 df_variable_summary = df_variable_summary.sort_values(
     ['decision', 'iv_rebinned'], ascending=[True, False]).reset_index(drop=True)

@@ -7,9 +7,9 @@ total_acc,CAPITAL,0.0014,0.0005,4,DROP,IV = 0.0014 — below 0.02 threshold. Ins
 grade,CHARACTER,0.4706,0.4706,7,KEEP,Strong monotonic WoE. LC risk grade captures FICO + DTI. No grouping needed.
 int_rate,CONDITIONS,0.4753,0.4314,7,KEEP,Risk-based pricing. Strongest predictor — strong monotonic WoE.
 term,CONDITIONS,0.2035,0.2035,2,KEEP,36 vs 60 months. Longer term correlates with higher risk.
-dti,CAPACITY,0.0757,0.0768,9,KEEP,Debt burden relative to income. Monotonically decreasing WoE.
+dti,CAPACITY,0.0786,0.0768,9,KEEP,Debt burden relative to income. Monotonically decreasing WoE.
 verification_status,CHARACTER,0.0522,0.0522,3,KEEP,Income credibility signal. 3 categories with clear WoE separation.
-annual_inc,CAPACITY,0.0262,0.031,11,KEEP,Income level. Monotonically increasing WoE. 11 bins up to >150K.
+annual_inc,CAPACITY,0.0316,0.031,11,KEEP,Income level. Monotonically increasing WoE. 11 bins up to >150K.
 inq_last_6mths,CHARACTER,0.0277,0.0276,4,KEEP,Recent credit-seeking behaviour. Monotonically decreasing WoE.
 home_ownership,CAPITAL,0.0256,0.0256,3,KEEP,Property as financial asset. RENT/OTHER/NONE/ANY merged (similar WoE).
 installment,CAPACITY,0.0363,0.023,6,KEEP,Monthly payment obligation. Lower installment → better credit quality.

@@ -179,11 +179,29 @@ def style_decision(val):
     }
     return colors.get(val, '')
 
-styled = (filtered_df.style
-          .map(style_decision, subset=['decision'])
-          .format({'iv_original': '{:.4f}', 'iv_rebinned': '{:.4f}'}))
+display_df = filtered_df.rename(columns={
+    'variable':    'Variable',
+    'category':    '5C Category',
+    'iv_original': 'IV (fine)',
+    'iv_rebinned': 'IV (coarse)',
+    'n_bins':      'Bins',
+    'decision':    'Decision',
+    'rationale':   'Rationale',
+})[['Variable', '5C Category', 'IV (fine)', 'IV (coarse)', 'Bins', 'Decision', 'Rationale']]
+
+styled = (display_df.style
+          .map(style_decision, subset=['Decision'])
+          .format({'IV (fine)': '{:.4f}', 'IV (coarse)': '{:.4f}'}))
 
 st.dataframe(styled, use_container_width=True, hide_index=True, height=500)
+
+st.caption(
+    "IV is computed on the **training split** (feature selection is a training-time "
+    "decision — using the out-of-time test set would risk look-ahead bias). "
+    "**IV (fine)** is the granular pre-binning value; **IV (coarse)** is after WoE "
+    "coarse-classing. Coarsening merges bins, so IV (fine) ≥ IV (coarse) for every "
+    "variable."
+)
 
 # ─── Summary metrics ────────────────────────────────────────
 st.markdown("##### Selection Summary")
